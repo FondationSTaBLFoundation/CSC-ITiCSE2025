@@ -48,18 +48,18 @@ Then, you can either
     2. choosing one of the pre-designed CSCs from the [Try at Home Package](TryAtHome.rar), such as [Party Game](#party-game) or [Lights Game](#lights-game). 
         - To find a detailed decription of the examples, please consult the [CSC Examples](#csc-examples) section.
     3. generating code based on the designed models by clicking on the code generator button <img src="Graphics/CodeGen.png" alt="code generator" width="40"/>. 
-    4. copying the generated code by `CTRL/CMD + C`.
+    4. copying the generated code by `CTRL/CMD + A` and `CTRL/CMD + C`.
 
 , or
 
 - design your own multi-user applications, by
     1. clicking on a statechart and navigating to the SCEditing mode.
     2. going back to the overall mode and designing the other statechart. 
-        - Navigation from SCEditing mode to the Overall mode is possible by clicking on the navigator button <img src="Graphics/navigator.png" alt="upload button" width="40"/>.
+        - Navigation from SCEditing mode to the Overall mode is possible by clicking on the navigator button <img src="Graphics/navigator.png" alt="navigator button" width="40"/>.
 
     3. connecting messages to the channels in the Overall mode.
     4. generating code based on the designed models by clicking on the code generator <img src="Graphics/CodeGen.png" alt="code generator" width="40"/>. 
-    5. copying the generated code by `CTRL/CMD + C`.
+    5. copying the generated code by `CTRL/CMD + A` and `CTRL/CMD + C`.
     6. saving the designed model locally by clicking on the save button <img src="Graphics/save.png" alt="save button" width="40"/> (optional).
 
 
