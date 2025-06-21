@@ -13,7 +13,25 @@
 
 
 ## Introduction
-We propose a new concurrency framework called *Communicating StateCharts (CSC)* with the potential to simplify the teaching concurrency to beginners. CSC was designed based on five main principles chosen to reduce barriers for beginners: using software visualization, Model-Driven Development (MDD), pure functions, Separation of Concerns (SoC), and---most importantly---raising the level of abstraction. To address these principles, we adopted features from existing concurrency models (i.e., process calculi and the actor model) in alignment with the principles, resulting in CSC's atomic statecharts, communicating through channels. We also present *CSCDraw*, a visual MDD tool to support CSC.
+We propose a new concurrency framework called *Communicating StateCharts (CSC)* with the potential to simplify the teaching concurrency to beginners. CSC was designed based on five main principles chosen to reduce barriers for beginners: using software visualization, Model-Driven Development (MDD), pure functions, Separation of Concerns (SoC), and---most importantly---raising the level of abstraction. To address these principles, we adopted features from existing concurrency models (i.e., process calculi and the actor model) in alignment with the principles, resulting in CSC's atomic statecharts, communicating through channels.
+Synchronization in CSC happens through separating the program into Local (private to each user) and Global (synchronized among every client connected to the server).
+This is based on the [Local-Global Model-View-Update (LG-MVU)](http://hdl.handle.net/11375/31494) architecture.
+
+We also present *CSCDraw*, a visual MDD tool to support CSC.
+CSCDraw has two modes:
+1. **Overall Mode:** The overall mode illustrates
+the channels connected to a statecharts’ interfaces, with the model
+contents including states, transitions, and synchronizing messages. 
+This view allows message specification and
+code generation.
+
+<!-- ![overall mode](Graphics/Overall.png) -->
+<img src="Graphics/Overall.png" alt="overall mode" width="500"/>
+
+2. **SCEditing mode:** In this mode, the states and
+transitions within a statechart can be edited.
+
+<img src="Graphics/SCEditing.png" alt="SCEditing mode" width="500"/>
 
 A detailed description of CSC and CSCDraw can be found in the [master's thesis](http://hdl.handle.net/11375/31620) of Sheida Emdadi.
 
@@ -27,14 +45,14 @@ To try designing a multi-user application with our visual model-driven developme
 Then, you can either
 - try using our pre-designed multi-player games by
     1. clicking on the upload button <img src="Graphics/upload.png" alt="upload button" width="50"/>, and then 
-    2. choosing one of the pre-designed CSCs from the [Try at Home Package](TryAtHome.rar), such as [Party Game](PartyGame\PartyGame.json) or [Lights Game](PartyGame\PartyGame.json). 
+    2. choosing one of the pre-designed CSCs from the [Try at Home Package](TryAtHome.rar), such as [Party Game](#party-game) or [Lights Game](#lights-game). 
         - To find a detailed decription of the examples, please consult the [CSC Examples](#csc-examples) section.
-    3. generating code based on the designed models by clicking on the code generator <img src="Graphics/CodeGen.png" alt="code generator" width="40"/>. 
+    3. generating code based on the designed models by clicking on the code generator button <img src="Graphics/CodeGen.png" alt="code generator" width="40"/>. 
     4. copying the generated code by `CTRL/CMD + C`.
 
 , or
 
-- start designing your own multi-user applications, by
+- design your own multi-user applications, by
     1. clicking on a statechart and navigating to the SCEditing mode.
     2. going back to the overall mode and designing the other statechart. 
         - Navigation from SCEditing mode to the Overall mode is possible by clicking on the navigator button <img src="Graphics/navigator.png" alt="upload button" width="40"/>.
@@ -53,6 +71,23 @@ To compile the generated code, please use our online IDE, [STaBL.rocks](https://
 ### CSC Examples
 
 
+#### Party Game
+The Party game is a multiplayer game that requires players to manage
+their money to go to a party. In particular, the party will start only if at
+least three players successfully arrive at the PartyRoom. If a player fails
+to manage their money, then the party will be cancelled.
+
+The [Party Game](PartyGame\PartyGame.json) can be found [here](https://stabl.rocks/ShowTeasyncServerClient?teasyncServerId=0e4eba0f-79a2-414b-abac-c30f2adfb68e).
+
+
+#### Lights Game
+This game is a very simple example of a CSC design to show how [synchronization](#introduction) happens in CSC.
+This idea of this multi-player game is that when
+a player hovers over a button it will light up only for them, 
+and when they click on a button, it will switch ON/OFF
+the lights for everybody connected to the server (global).
+
+The [Lights game](LightsGame\LightsGameCSC.json) can be found [here](https://stabl.rocks/ShowTeasyncServerClient?teasyncServerId=b110fe0e-259c-46e8-8ec5-d365e5c03f7f).
 
 
 
@@ -75,5 +110,5 @@ After generating the code in CSCDraw, please log into your account on [STaBL.roc
         `Successfully generated new Codec.Decoders and Codec.Encoders modules.`
 10. Open the Main module.
 11. Paste the rest of the generated code.
-12. Click on the compile button on the left top corner <img src="Graphics/compile.png" alt="compile button" width="40"/>, and see the output on the right pane.
+12. Click on the compile button on the top left corner <img src="Graphics/compile.png" alt="compile button" width="40"/>, and see the output on the right pane.
 
