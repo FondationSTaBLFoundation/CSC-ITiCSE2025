@@ -55,7 +55,7 @@ Then, you can either
 - design your own multi-user applications, by
     1. clicking on a statechart and navigating to the SCEditing mode.
     2. going back to the overall mode and designing the other statechart. 
-        - Navigation from SCEditing mode to the Overall mode is possible by clicking on the navigator button <img src="Graphics/navigator.png" alt="navigator button" width="40"/>.
+        - Navigation from SCEditing mode to the Overall mode is possible by clicking on the navigator button <img src="Graphics/Navigator.png" alt="navigator button" width="40"/>.
 
     3. connecting messages to the channels in the Overall mode.
     4. generating code based on the designed models by clicking on the code generator <img src="Graphics/CodeGen.png" alt="code generator" width="40"/>. 
