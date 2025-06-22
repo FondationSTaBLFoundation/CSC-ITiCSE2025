@@ -17811,7 +17811,7 @@ var $author$project$Utilities$Decoders$boundingBoxDecoder = A2(
 		}
 	},
 	$elm$json$Json$Decode$list($elm$json$Json$Decode$float));
-var $elm$json$Json$Decode$map6 = _Json_map6;
+var $elm$json$Json$Decode$map8 = _Json_map8;
 var $elm$json$Json$Decode$maybe = function (decoder) {
 	return $elm$json$Json$Decode$oneOf(
 		_List_fromArray(
@@ -17986,10 +17986,10 @@ var $author$project$Utilities$Decoders$transitionDecoder = A3(
 var $author$project$Utilities$Decoders$stateChartDecoder = A2(
 	$elm$json$Json$Decode$andThen,
 	$elm$core$Basics$identity,
-	A7(
-		$elm$json$Json$Decode$map6,
-		F6(
-			function (statesStr, transitionsStr, startStateIdx, bb, outInterfaceStr, globalOffset) {
+	A9(
+		$elm$json$Json$Decode$map8,
+		F8(
+			function (statesStr, transitionsStr, startStateIdx, bb, outInterfaceStr, globalOffset, panVal, zoomVal) {
 				var _v0 = _Utils_Tuple3(
 					$author$project$Utilities$Decoders$stringKeyDictToIntKeyDict(statesStr),
 					$author$project$Utilities$Decoders$stringKeyDictToIntKeyDict(transitionsStr),
@@ -18001,19 +18001,7 @@ var $author$project$Utilities$Decoders$stateChartDecoder = A2(
 							var transitions = _v0.b.a;
 							var outInterface = _v0.c.a;
 							return $elm$json$Json$Decode$succeed(
-								{
-									bb: bb,
-									dragState: $author$project$Utilities$Types$Released,
-									globalOffset: globalOffset,
-									outInterface: outInterface,
-									pan: _Utils_Tuple2(0, 0),
-									redoLst: _List_Nil,
-									startStateIdx: startStateIdx,
-									states: states,
-									transitions: transitions,
-									undoLst: _List_Nil,
-									zoom: 1.0
-								});
+								{bb: bb, dragState: $author$project$Utilities$Types$Released, globalOffset: globalOffset, outInterface: outInterface, pan: panVal, redoLst: _List_Nil, startStateIdx: startStateIdx, states: states, transitions: transitions, undoLst: _List_Nil, zoom: zoomVal});
 						} else {
 							var e = _v0.c.a;
 							return $elm$json$Json$Decode$fail(e);
@@ -18050,7 +18038,26 @@ var $author$project$Utilities$Decoders$stateChartDecoder = A2(
 			A2(
 				$elm$json$Json$Decode$andThen,
 				$author$project$Utilities$Decoders$toTuple2,
-				$elm$json$Json$Decode$list($elm$json$Json$Decode$float)))));
+				$elm$json$Json$Decode$list($elm$json$Json$Decode$float))),
+		$elm$json$Json$Decode$oneOf(
+			_List_fromArray(
+				[
+					A2(
+					$elm$json$Json$Decode$field,
+					'pan',
+					A2(
+						$elm$json$Json$Decode$andThen,
+						$author$project$Utilities$Decoders$toTuple2,
+						$elm$json$Json$Decode$list($elm$json$Json$Decode$float))),
+					$elm$json$Json$Decode$succeed(
+					_Utils_Tuple2(0, 0))
+				])),
+		$elm$json$Json$Decode$oneOf(
+			_List_fromArray(
+				[
+					A2($elm$json$Json$Decode$field, 'zoom', $elm$json$Json$Decode$float),
+					$elm$json$Json$Decode$succeed(1.0)
+				]))));
 var $author$project$Utilities$Decoders$cscDecoder = A2(
 	$elm$json$Json$Decode$andThen,
 	$elm$core$Basics$identity,
@@ -18113,7 +18120,7 @@ var $elm$json$Json$Encode$object = function (pairs) {
 			pairs));
 };
 var $elm$json$Json$Encode$string = _Json_wrap;
-var $author$project$Utilities$EnDecoders$channelToJson = function (_v0) {
+var $author$project$Utilities$Encoders$channelToJson = function (_v0) {
 	var upper = _v0.a;
 	var lower = _v0.b;
 	var up = _v0.c;
@@ -18135,7 +18142,7 @@ var $author$project$Utilities$EnDecoders$channelToJson = function (_v0) {
 				A2($elm$json$Json$Encode$list, $elm$json$Json$Encode$int, down))
 			]));
 };
-var $author$project$Utilities$EnDecoders$dictToJson = F2(
+var $author$project$Utilities$Encoders$dictToJson = F2(
 	function (encodeVal, dict) {
 		return $elm$json$Json$Encode$object(
 			A2(
@@ -18149,7 +18156,7 @@ var $author$project$Utilities$EnDecoders$dictToJson = F2(
 				},
 				$elm$core$Dict$toList(dict)));
 	});
-var $author$project$Utilities$EnDecoders$dictToJsonStringKeys = F2(
+var $author$project$Utilities$Encoders$dictToJsonStringKeys = F2(
 	function (encodeVal, dict) {
 		return $elm$json$Json$Encode$object(
 			A2(
@@ -18164,7 +18171,7 @@ var $author$project$Utilities$EnDecoders$dictToJsonStringKeys = F2(
 				$elm$core$Dict$toList(dict)));
 	});
 var $elm$json$Json$Encode$float = _Json_wrap;
-var $author$project$Utilities$EnDecoders$encodeBoundingBox = function (_v0) {
+var $author$project$Utilities$Encoders$encodeBoundingBox = function (_v0) {
 	var left = _v0.a;
 	var right = _v0.b;
 	var top = _v0.c;
@@ -18176,7 +18183,7 @@ var $author$project$Utilities$EnDecoders$encodeBoundingBox = function (_v0) {
 			[left, right, top, bottom]));
 };
 var $elm$json$Json$Encode$null = _Json_encodeNull;
-var $author$project$Utilities$EnDecoders$maybeInt = function (mi) {
+var $author$project$Utilities$Encoders$maybeInt = function (mi) {
 	if (mi.$ === 'Just') {
 		var i = mi.a;
 		return $elm$json$Json$Encode$int(i);
@@ -18200,7 +18207,7 @@ var $elm$json$Json$Encode$dict = F3(
 				_Json_emptyObject(_Utils_Tuple0),
 				dictionary));
 	});
-var $author$project$Utilities$EnDecoders$encodeElmType = function (elmType) {
+var $author$project$Utilities$Encoders$encodeElmType = function (elmType) {
 	switch (elmType.$) {
 		case 'ElmInt':
 			return $elm$json$Json$Encode$string('ElmInt');
@@ -18218,7 +18225,7 @@ var $author$project$Utilities$EnDecoders$encodeElmType = function (elmType) {
 			return $elm$json$Json$Encode$string('TickMsgKeyboard');
 	}
 };
-var $author$project$Utilities$EnDecoders$encodeMaybe = F2(
+var $author$project$Utilities$Encoders$encodeMaybe = F2(
 	function (encoder, maybeValue) {
 		if (maybeValue.$ === 'Just') {
 			var value = maybeValue.a;
@@ -18227,7 +18234,7 @@ var $author$project$Utilities$EnDecoders$encodeMaybe = F2(
 			return $elm$json$Json$Encode$null;
 		}
 	});
-var $author$project$Utilities$EnDecoders$encodeTarget = function (_v0) {
+var $author$project$Utilities$Encoders$encodeTarget = function (_v0) {
 	var _v1 = _v0.a;
 	var px = _v1.a;
 	var py = _v1.b;
@@ -18248,10 +18255,10 @@ var $author$project$Utilities$EnDecoders$encodeTarget = function (_v0) {
 				$elm$json$Json$Encode$string(cond)),
 				_Utils_Tuple2(
 				'msg',
-				A2($author$project$Utilities$EnDecoders$encodeMaybe, $elm$json$Json$Encode$int, maybeMsg))
+				A2($author$project$Utilities$Encoders$encodeMaybe, $elm$json$Json$Encode$int, maybeMsg))
 			]));
 };
-var $author$project$Utilities$EnDecoders$encodeTransInstance = function (_v0) {
+var $author$project$Utilities$Encoders$encodeTransInstance = function (_v0) {
 	var _v1 = _v0.a;
 	var dx = _v1.a;
 	var dy = _v1.b;
@@ -18278,10 +18285,10 @@ var $author$project$Utilities$EnDecoders$encodeTransInstance = function (_v0) {
 						[pullX, pullY]))),
 				_Utils_Tuple2(
 				'targets',
-				A3($elm$json$Json$Encode$dict, $elm$core$String$fromInt, $author$project$Utilities$EnDecoders$encodeTarget, targets))
+				A3($elm$json$Json$Encode$dict, $elm$core$String$fromInt, $author$project$Utilities$Encoders$encodeTarget, targets))
 			]));
 };
-var $author$project$Utilities$EnDecoders$stateToJson = function (_v0) {
+var $author$project$Utilities$Encoders$stateToJson = function (_v0) {
 	var _v1 = _v0.a;
 	var x = _v1.a;
 	var y = _v1.b;
@@ -18303,13 +18310,13 @@ var $author$project$Utilities$EnDecoders$stateToJson = function (_v0) {
 				$elm$json$Json$Encode$string(name)),
 				_Utils_Tuple2(
 				'elmTypes',
-				A2($elm$json$Json$Encode$list, $author$project$Utilities$EnDecoders$encodeElmType, elmTypes)),
+				A2($elm$json$Json$Encode$list, $author$project$Utilities$Encoders$encodeElmType, elmTypes)),
 				_Utils_Tuple2(
 				'transitions',
-				A3($elm$json$Json$Encode$dict, $elm$core$String$fromInt, $author$project$Utilities$EnDecoders$encodeTransInstance, transDict))
+				A3($elm$json$Json$Encode$dict, $elm$core$String$fromInt, $author$project$Utilities$Encoders$encodeTransInstance, transDict))
 			]));
 };
-var $author$project$Utilities$EnDecoders$transitionToJson = function (_v0) {
+var $author$project$Utilities$Encoders$transitionToJson = function (_v0) {
 	var name = _v0.a;
 	var args = _v0.b;
 	return $elm$json$Json$Encode$object(
@@ -18320,10 +18327,10 @@ var $author$project$Utilities$EnDecoders$transitionToJson = function (_v0) {
 				$elm$json$Json$Encode$string(name)),
 				_Utils_Tuple2(
 				'args',
-				A2($elm$json$Json$Encode$list, $author$project$Utilities$EnDecoders$encodeElmType, args))
+				A2($elm$json$Json$Encode$list, $author$project$Utilities$Encoders$encodeElmType, args))
 			]));
 };
-var $author$project$Utilities$EnDecoders$tuple2 = F3(
+var $author$project$Utilities$Encoders$tuple2 = F3(
 	function (a, b, _v0) {
 		var x = _v0.a;
 		var y = _v0.b;
@@ -18336,7 +18343,7 @@ var $author$project$Utilities$EnDecoders$tuple2 = F3(
 					b(y)
 				]));
 	});
-var $author$project$Utilities$EnDecoders$undoRedoToJson = function (_v0) {
+var $author$project$Utilities$Encoders$undoRedoToJson = function (_v0) {
 	var s = _v0.a;
 	var t = _v0.b;
 	var i = _v0.c;
@@ -18345,64 +18352,64 @@ var $author$project$Utilities$EnDecoders$undoRedoToJson = function (_v0) {
 		$elm$core$Basics$identity,
 		_List_fromArray(
 			[
-				A2($author$project$Utilities$EnDecoders$dictToJson, $author$project$Utilities$EnDecoders$stateToJson, s),
-				A2($author$project$Utilities$EnDecoders$dictToJson, $author$project$Utilities$EnDecoders$transitionToJson, t),
+				A2($author$project$Utilities$Encoders$dictToJson, $author$project$Utilities$Encoders$stateToJson, s),
+				A2($author$project$Utilities$Encoders$dictToJson, $author$project$Utilities$Encoders$transitionToJson, t),
 				$elm$json$Json$Encode$int(i)
 			]));
 };
-var $author$project$Utilities$EnDecoders$stateChartToJson = function (sc) {
+var $author$project$Utilities$Encoders$stateChartToJson = function (sc) {
 	return $elm$json$Json$Encode$object(
 		_List_fromArray(
 			[
 				_Utils_Tuple2(
 				'states',
-				A2($author$project$Utilities$EnDecoders$dictToJson, $author$project$Utilities$EnDecoders$stateToJson, sc.states)),
+				A2($author$project$Utilities$Encoders$dictToJson, $author$project$Utilities$Encoders$stateToJson, sc.states)),
 				_Utils_Tuple2(
 				'transitions',
-				A2($author$project$Utilities$EnDecoders$dictToJson, $author$project$Utilities$EnDecoders$transitionToJson, sc.transitions)),
+				A2($author$project$Utilities$Encoders$dictToJson, $author$project$Utilities$Encoders$transitionToJson, sc.transitions)),
 				_Utils_Tuple2(
 				'startStateIdx',
-				$author$project$Utilities$EnDecoders$maybeInt(sc.startStateIdx)),
+				$author$project$Utilities$Encoders$maybeInt(sc.startStateIdx)),
 				_Utils_Tuple2(
 				'dragState',
 				$elm$json$Json$Encode$string('Released')),
 				_Utils_Tuple2(
 				'bb',
-				$author$project$Utilities$EnDecoders$encodeBoundingBox(sc.bb)),
+				$author$project$Utilities$Encoders$encodeBoundingBox(sc.bb)),
 				_Utils_Tuple2(
 				'outInterface',
-				A2($author$project$Utilities$EnDecoders$dictToJson, $author$project$Utilities$EnDecoders$transitionToJson, sc.outInterface)),
+				A2($author$project$Utilities$Encoders$dictToJson, $author$project$Utilities$Encoders$transitionToJson, sc.outInterface)),
 				_Utils_Tuple2(
 				'pan',
-				A3($author$project$Utilities$EnDecoders$tuple2, $elm$json$Json$Encode$float, $elm$json$Json$Encode$float, sc.pan)),
+				A3($author$project$Utilities$Encoders$tuple2, $elm$json$Json$Encode$float, $elm$json$Json$Encode$float, sc.pan)),
 				_Utils_Tuple2(
 				'zoom',
 				$elm$json$Json$Encode$float(sc.zoom)),
 				_Utils_Tuple2(
 				'globalOffset',
-				A3($author$project$Utilities$EnDecoders$tuple2, $elm$json$Json$Encode$float, $elm$json$Json$Encode$float, sc.globalOffset)),
+				A3($author$project$Utilities$Encoders$tuple2, $elm$json$Json$Encode$float, $elm$json$Json$Encode$float, sc.globalOffset)),
 				_Utils_Tuple2(
 				'undoLst',
-				A2($elm$json$Json$Encode$list, $author$project$Utilities$EnDecoders$undoRedoToJson, sc.undoLst)),
+				A2($elm$json$Json$Encode$list, $author$project$Utilities$Encoders$undoRedoToJson, sc.undoLst)),
 				_Utils_Tuple2(
 				'redoLst',
-				A2($elm$json$Json$Encode$list, $author$project$Utilities$EnDecoders$undoRedoToJson, sc.redoLst))
+				A2($elm$json$Json$Encode$list, $author$project$Utilities$Encoders$undoRedoToJson, sc.redoLst))
 			]));
 };
-var $author$project$Utilities$EnDecoders$cscToJson = F4(
+var $author$project$Utilities$Encoders$cscToJson = F4(
 	function (scs, channels, draggedMsgslabels, nextIdx) {
 		return $elm$json$Json$Encode$object(
 			_List_fromArray(
 				[
 					_Utils_Tuple2(
 					'scs',
-					A2($author$project$Utilities$EnDecoders$dictToJsonStringKeys, $author$project$Utilities$EnDecoders$stateChartToJson, scs)),
+					A2($author$project$Utilities$Encoders$dictToJsonStringKeys, $author$project$Utilities$Encoders$stateChartToJson, scs)),
 					_Utils_Tuple2(
 					'channels',
-					A2($author$project$Utilities$EnDecoders$dictToJson, $author$project$Utilities$EnDecoders$channelToJson, channels)),
+					A2($author$project$Utilities$Encoders$dictToJson, $author$project$Utilities$Encoders$channelToJson, channels)),
 					_Utils_Tuple2(
 					'draggedMsgslabels',
-					A2($author$project$Utilities$EnDecoders$dictToJson, $elm$json$Json$Encode$string, draggedMsgslabels)),
+					A2($author$project$Utilities$Encoders$dictToJson, $elm$json$Json$Encode$string, draggedMsgslabels)),
 					_Utils_Tuple2(
 					'nextIdx',
 					$elm$json$Json$Encode$int(nextIdx))
@@ -21568,7 +21575,7 @@ var $author$project$Utilities$Update$Update$update3 = F2(
 					var json = A2(
 						$elm$json$Json$Encode$encode,
 						4,
-						A4($author$project$Utilities$EnDecoders$cscToJson, model.scs, model.channels, model.draggedMsgslabels, model.nextIdx));
+						A4($author$project$Utilities$Encoders$cscToJson, model.scs, model.channels, model.draggedMsgslabels, model.nextIdx));
 					return _Utils_Tuple3(
 						model,
 						A3($elm$file$File$Download$string, 'csc.json', 'application/json', json),
