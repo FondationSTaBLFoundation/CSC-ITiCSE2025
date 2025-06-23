@@ -9,7 +9,7 @@
 - [Introduction](#introduction)
 - [Try at Home](#try-at-home)
     -  [CSC Examples](#csc-examples)
-    -  [Online IDE Manual](#online-ide-manual)
+    -  [Introduction to Our Online IDE](#introduction-to-our-online-ide)
 
 
 ## Introduction
@@ -49,6 +49,8 @@ Then, you can either
         - To find a detailed decription of the examples, please consult the [CSC Examples](#csc-examples) section.
     3. generating code based on the designed models by clicking on the code generator button <img src="Graphics/CodeGen.png" alt="code generator" width="40"/>. 
     4. copying the generated code by `CTRL/CMD + A` and `CTRL/CMD + C`.
+    5. Compile the generated code on our online IDE, [STaBL.rocks](https://stabl.rocks/).
+        - Section [Introduction to Our Online IDE](#introduction-to-our-online-ide) provides a detailed explanation of how to run your generated code on our online IDE.
 
 , or
 
@@ -61,10 +63,11 @@ Then, you can either
     4. generating code based on the designed models by clicking on the code generator <img src="Graphics/CodeGen.png" alt="code generator" width="40"/>. 
     5. copying the generated code by `CTRL/CMD + A` and `CTRL/CMD + C`.
     6. saving the designed model locally by clicking on the save button <img src="Graphics/save.png" alt="save button" width="40"/> (optional).
+    7. Compile the generated code on our online IDE, [STaBL.rocks](https://stabl.rocks/).
+        - Section [Introduction to Our Online IDE](#introduction-to-our-online-ide) provides a detailed explanation of how to run your generated code on our online IDE.
 
 
-To compile the generated code, please use our online IDE, [STaBL.rocks](https://stabl.rocks/).
-- Section [Online IDE Manual](#online-ide-manual) provides a detailed explanation of how to run your generated code on our online IDE.
+
 
 
 
@@ -91,7 +94,7 @@ The [Lights game](LightsGame\LightsGameCSC.json) can be found [here](https://sta
 
 
 
-### Online IDE Manual
+### Introduction to Our Online IDE
 
 If you don't have an account on [STaBL.rocks](https://stabl.rocks/), please contact either [Sheida](emdadibz@mcmaster.ca) or [Dr. Anand](anandc@mcmaster.ca).
 
@@ -101,14 +104,17 @@ After generating the code in CSCDraw, please log into your account on [STaBL.roc
 3. Create a project using `TEASync` template.
 4. Open your created project.
 5. Open the Types module.
-6. Paste the generated code.
-7. Take out the code that belongs to the Main module. 
+6. Paste the generated code by `CTRL/CMD + V`.
+7. Cut (`CTRL/CMD + X`) the code that belongs to the Main module. 
     - Look for this comment `--Put this code into the Main module.` in the generated code, then select and cut the code from this comment (by `CTRL/CMD + X`).
-8. Click on the `Release button in the Types module <img src="Graphics/Release.png" alt="release button" width="70"/>.
-9. In your Project's page (where you can see the Main and Types modules), click on the `Generate Codec` button <img src="Graphics/Codec.png" alt="codec button" width="70"/>.
+8. Before pasting the cut code, in the same module (Types) compile the code by clicking on the compile button <img src="Graphics/compile.png" alt="compile button" width="40"/>.
+9. Click on the `Release button in the Types module <img src="Graphics/Release.png" alt="release button" width="70"/>.
+10. In your Project's page (where you can see the Main and Types modules), click on the `Generate Codec` button <img src="Graphics/Codec.png" alt="codec button" width="70"/>.
+The Project's page looks like:
+    <img src="Graphics/modules.png" alt="modules mode" width="500"/>
     - If the encoders and decoders are successfully generated, you will see a confirmation like this:
         `Successfully generated new Codec.Decoders and Codec.Encoders modules.`
-10. Open the Main module.
-11. Paste the rest of the generated code.
-12. Click on the compile button on the top left corner <img src="Graphics/compile.png" alt="compile button" width="40"/>, and see the output on the right pane.
+11. Open the Main module.
+12. Paste the rest of the generated code starting from the comment `--Put this code into the Main module.`.
+13. Click on the compile button on the top left corner <img src="Graphics/compile.png" alt="compile button" width="40"/>, and see the output on the right pane.
 
