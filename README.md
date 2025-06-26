@@ -40,6 +40,7 @@ A detailed description of CSC and CSCDraw can be found in the [master's thesis](
 To try designing a multi-user application with our visual model-driven development tool, CSCDraw, please:
 
 1. download the [Try at Home Package](TryAtHome.rar) locally on your device. 
+    - If you are facing any troubles with opening the package, please download these files manually: [CSCDraw](CSCDraw.html), [Party Game](#party-game), and [Lights Game](#lights-game).
 2. click on CSCDraw.html on your device to open it with your browser.
 
 Then, you can either
