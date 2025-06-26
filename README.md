@@ -39,14 +39,14 @@ A detailed description of CSC and CSCDraw can be found in the [master's thesis](
 
 To try designing a multi-user application with our visual model-driven development tool, CSCDraw, please:
 
-1. download the [Try at Home Package](TryAtHome.rar) locally on your device. 
+1. download the [Try at Home Package](Try-at-Home.zip) locally on your device. 
     - If you are facing any troubles with opening the package, please download these files manually: [CSCDraw](CSCDraw.html), [Party Game](#party-game), and [Lights Game](#lights-game).
 2. click on CSCDraw.html on your device to open it with your browser.
 
 Then, you can either
 - try using our pre-designed multi-player games by
     1. clicking on the upload button <img src="Graphics/upload.png" alt="upload button" width="50"/>, and then 
-    2. choosing one of the pre-designed CSCs from the [Try at Home Package](TryAtHome.rar), such as [Party Game](#party-game) or [Lights Game](#lights-game). 
+    2. choosing one of the pre-designed CSCs from the [Try at Home Package](Try-at-Home.zip), such as [Party Game](#party-game) or [Lights Game](#lights-game). 
         - To find a detailed decription of the examples, please consult the [CSC Examples](#csc-examples) section.
     3. generating code based on the designed models by clicking on the code generator button <img src="Graphics/CodeGen.png" alt="code generator" width="40"/>. 
     4. copying the generated code by `CTRL/CMD + A` and `CTRL/CMD + C`.

@@ -8401,6 +8401,27 @@ var $author$project$View$StateRenderers$CodeView$codeDisplayer = function (codeD
 			$author$project$View$StateRenderers$CodeView$downloadCodeInstructions
 		]);
 };
+var $elm$core$String$lines = _String_lines;
+var $author$project$View$StateRenderers$CodeView$drawErrorText = function (err) {
+	var lines = $elm$core$String$lines(err);
+	return A2(
+		$elm$core$List$indexedMap,
+		F2(
+			function (i, line) {
+				return A2(
+					$MacCASOutreach$graphicsvg$GraphicSVG$move,
+					_Utils_Tuple2(0, 40 - (i * 10)),
+					A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+						$MacCASOutreach$graphicsvg$GraphicSVG$red,
+						$MacCASOutreach$graphicsvg$GraphicSVG$centered(
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$size,
+								5,
+								$MacCASOutreach$graphicsvg$GraphicSVG$text(line)))));
+			}),
+		lines);
+};
 var $author$project$View$Colours$errorRed = A4($MacCASOutreach$graphicsvg$GraphicSVG$rgba, 250, 100, 50, 0.5);
 var $author$project$Utilities$Types$DeleteChannelMsg = function (a) {
 	return {$: 'DeleteChannelMsg', a: a};
@@ -16282,28 +16303,22 @@ var $author$project$Main$myShapes = function (model) {
 			return A4($author$project$View$StateRenderers$GDragChMsg$gDragChMsgRenderer, model, chIdx, lbl, pos);
 		case 'GlobalError':
 			var err = _v0.a;
-			return _List_fromArray(
-				[
-					A2(
-					$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-					$author$project$Utilities$Types$ErrorToOverallView,
-					A2($MacCASOutreach$graphicsvg$GraphicSVG$repaint, $author$project$View$Colours$errorRed, $author$project$View$Graphics$invisibleRect)),
-					A2(
-					$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-					$author$project$Utilities$Types$ErrorToOverallView,
-					A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(86, 58),
-						$author$project$View$Graphics$closeButton)),
-					A2(
-					$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-					$MacCASOutreach$graphicsvg$GraphicSVG$red,
-					$MacCASOutreach$graphicsvg$GraphicSVG$centered(
+			return _Utils_ap(
+				_List_fromArray(
+					[
 						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$size,
-							5,
-							$MacCASOutreach$graphicsvg$GraphicSVG$text(err))))
-				]);
+						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
+						$author$project$Utilities$Types$ErrorToOverallView,
+						A2($MacCASOutreach$graphicsvg$GraphicSVG$repaint, $author$project$View$Colours$errorRed, $author$project$View$Graphics$invisibleRect)),
+						A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
+						$author$project$Utilities$Types$ErrorToOverallView,
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$move,
+							_Utils_Tuple2(86, 58),
+							$author$project$View$Graphics$closeButton))
+					]),
+				$author$project$View$StateRenderers$CodeView$drawErrorText(err));
 		case 'GlobalDisplayCode':
 			return $author$project$View$StateRenderers$CodeView$codeDisplayer(model.code);
 		case 'GlobalPanZoom':
@@ -17743,16 +17758,23 @@ var $author$project$Utilities$Helpers$calcMsgPos = function (stateChart) {
 				}),
 			$elm$core$Dict$toList(stateChart.outInterface)));
 };
+var $elm$core$Tuple$second = function (_v0) {
+	var y = _v0.b;
+	return y;
+};
 var $author$project$Utilities$Helpers$connectionChecker = F2(
 	function (inputDict, draggedDict) {
-		var inList = $elm$core$Dict$keys(inputDict);
-		var draggedList = $elm$core$Dict$keys(draggedDict);
-		return A2(
-			$elm$core$List$all,
-			function (item) {
-				return A2($elm$core$List$member, item, draggedList);
-			},
-			inList);
+		var missing = A2(
+			$elm$core$List$map,
+			$elm$core$Tuple$second,
+			A2(
+				$elm$core$List$filter,
+				function (_v0) {
+					var k = _v0.a;
+					return !A2($elm$core$Dict$member, k, draggedDict);
+				},
+				$elm$core$Dict$toList(inputDict)));
+		return $elm$core$List$isEmpty(missing) ? $elm$core$Result$Ok(true) : $elm$core$Result$Err(missing);
 	});
 var $author$project$Utilities$Helpers$convertCoords = F2(
 	function (gModel, _v0) {
@@ -18510,6 +18532,18 @@ var $elm$file$File$Select$file = F2(
 			toMsg,
 			_File_uploadOne(mimes));
 	});
+var $author$project$Utilities$Helpers$formatMissing = function (transitions) {
+	return A2(
+		$elm$core$String$join,
+		'\n',
+		A2(
+			$elm$core$List$map,
+			function (_v0) {
+				var msg = _v0.a;
+				return '- ' + msg;
+			},
+			transitions));
+};
 var $author$project$Utilities$Constants$defaultTypeValues = function (elmType) {
 	switch (elmType.$) {
 		case 'ElmInt':
@@ -20069,10 +20103,6 @@ var $author$project$Utilities$Helpers$firstError = function (results) {
 	} else {
 		return $elm$core$Result$Ok(_List_Nil);
 	}
-};
-var $elm$core$Tuple$second = function (_v0) {
-	var y = _v0.b;
-	return y;
 };
 var $author$project$Utilities$Helpers$populateOutputs = function (model) {
 	var stateCharts = model.scs;
@@ -23011,13 +23041,25 @@ var $author$project$Utilities$Update$Update$update3 = F2(
 											var _v174 = _Utils_Tuple2(
 												A2($author$project$Utilities$Helpers$connectionChecker, globalSCTrs, model.draggedMsgslabels),
 												A2($author$project$Utilities$Helpers$connectionChecker, localSCTrs, model.draggedMsgslabels));
-											if (_v174.a && _v174.b) {
-												return $author$project$Utilities$Types$GlobalDisplayCode;
+											if (_v174.a.$ === 'Ok') {
+												if (_v174.b.$ === 'Ok') {
+													if (_v174.a.a && _v174.b.a) {
+														return $author$project$Utilities$Types$GlobalDisplayCode;
+													} else {
+														return $author$project$Utilities$Types$GlobalError('Please make sure every input transition is connected to a channel.');
+													}
+												} else {
+													var missing2 = _v174.b.a;
+													return $author$project$Utilities$Types$GlobalError(
+														'Please connect these local transitions to a channel:\n ' + $author$project$Utilities$Helpers$formatMissing(missing2));
+												}
 											} else {
-												return $author$project$Utilities$Types$GlobalError('Please make sure every input transition is connected to a channel.');
+												var missing1 = _v174.a.a;
+												return $author$project$Utilities$Types$GlobalError(
+													'Please connect these global transitions to a channel:\n ' + $author$project$Utilities$Helpers$formatMissing(missing1));
 											}
 										} else {
-											return $author$project$Utilities$Types$GlobalError('Please desgin a CSC, then try generating code.');
+											return $author$project$Utilities$Types$GlobalError('Please connect messages to the channels, then try generating code.');
 										}
 									}()
 								}),
